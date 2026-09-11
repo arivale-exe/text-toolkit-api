@@ -5,7 +5,6 @@ import re, json
 def split_sentences(text):
     """Split text into sentences."""
     text = text.strip()
-    # Simple sentence splitting
     sentences = re.split(r'(?<=[.!?])\s+', text)
     return [s.strip() for s in sentences if s.strip()]
 
@@ -41,11 +40,8 @@ def keywords(text, n=10):
 
 def html_to_text(html):
     """Convert HTML to clean text."""
-    # Remove script and style tags
     html = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', html, flags=re.DOTALL)
-    # Remove all tags
     text = re.sub(r'<[^>]+>', ' ', html)
-    # Clean whitespace
     text = re.sub(r'\s+', ' ', text).strip()
     return text.lower()
 
@@ -58,13 +54,6 @@ def validate_schema(instance, schema):
     if not isinstance(schema, dict):
         errors.append("Schema must be a dict/object")
         return errors
-
-    expected_type = schema.get("type")
-    if expected_type and expected_type != "object":
-        actual = type(instance).__name__
-        if expected_type == "object" and actual != "dict":
-            errors.append(f"Expected type {expected_type}, got {actual}")
-
     properties = schema.get("properties", {})
     for prop, prop_schema in properties.items():
         if prop in instance:

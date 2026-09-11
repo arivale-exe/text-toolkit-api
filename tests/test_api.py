@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Tests for Text Toolkit API endpoints"""
-import json, subprocess, time, urllib.request
-import sys, os
+import json, sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from texttoolkit import summarize, keywords, html_to_text, validate_schema
 
@@ -31,8 +30,7 @@ def test_validate():
     print("✓ validate")
 
 def test_api_endpoint():
-    """Test that the live API responds correctly."""
-    import urllib.request, json
+    import urllib.request
     req = urllib.request.Request("http://localhost:8090/health")
     try:
         with urllib.request.urlopen(req, timeout=5) as resp:
