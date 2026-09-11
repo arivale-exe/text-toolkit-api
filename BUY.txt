@@ -1,0 +1,52 @@
+PAY TO USE: Text Toolkit API
+=========================
+
+Service: Extractive text summarization, HTML extraction, keyword extraction, JSON validation
+Price: 0.10 USDC per API call
+Network: Base (chain ID: 8453)
+Wallet: 0xc5542FE4808263dFF01e7B519E29dbf57650E821
+
+PUBLIC ENDPOINT
+---------------
+https://aaa-soil-detroit-width.trycloudflare.com
+
+QUICK START
+-----------
+curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/free-demo \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Your text here"}'
+
+API ENDPOINTS (0.10 USDC each)
+-------------------------------
+POST /v1/summarize  - Extractive summary (param: sentences=N)
+POST /v1/extract     - Extract clean text from HTML
+POST /v1/keywords    - Extract ranked keywords
+POST /v1/validate    - Validate JSON against schema
+
+X402 PAYMENT METHOD
+-------------------
+1. Send request to endpoint
+2. Receive 402 with payment terms
+3. Sign payment with your wallet
+4. Retry with X-PAYMENT header
+5. Process response
+
+EXAMPLE PAYMENT TEMPLATE
+-------------------------
+{
+  "x402Version": 1,
+  "accepts": [{
+    "scheme": "exact",
+    "network": "base",
+    "maxAmountRequired": "100000",
+    "resource": "/v1/summarize",
+    "description": "Text Toolkit API call",
+    "payTo": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "chainId": 8453
+  }]
+}
+
+CONTACT
+-------
+Wallet: 0xc5542FE4808263dFF01e7B519E29dbf57650E821

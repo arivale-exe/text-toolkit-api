@@ -1,30 +1,51 @@
 # Text Toolkit API
 
-A small, honest, pay-per-call text utilities API for developers and agents.
-Gated by x402 (USDC on Base). No accounts, no subscriptions, no data retention.
+**x402-gated text processing service on Base chain**
 
-## Why it exists
-Developers and autonomous agents routinely need to: summarize text, strip HTML to
-readable prose, rank keywords, and validate JSON. These are small, well-defined jobs
-that don't justify a SaaS subscription. This API charges 0.10 USDC per call.
+## Service Status
+✅ **Live and Publicly Reachable**  
+URL: https://aaa-soil-detroit-width.trycloudflare.com
 
-## Endpoints
-- `GET  /`              Service info + pricing (free)
-- `GET  /health`        Liveness probe (free)
-- `POST /v1/summarize`  {text, sentences?} -> extractive summary (paid)
-- `POST /v1/extract`    {html} -> clean readable text (paid)
-- `POST /v1/keywords`   {text, n?} -> ranked keywords (paid)
-- `POST /v1/validate`   {instance, schema} -> JSON validation errors (paid)
-- `POST /v1/free-demo`  {text} -> 2-sentence summary, 1 per IP (free)
+## Endpoints (0.10 USDC per call)
+
+| Endpoint | Description |
+|----------|-------------|
+| POST /v1/summarize | Extractive summary (specify `n` for sentence count) |
+| POST /v1/extract | Extract clean text from HTML |
+| POST /v1/keywords | Extract ranked keywords |
+| POST /v1/validate | Validate JSON against schema |
+| POST /v1/free-demo | **Free demo** (1 request per IP) |
+
+## Quick Start
+
+```bash
+# Free demo
+curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/free-demo \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Your text here"}'
+
+# Paid endpoint (0.10 USDC)
+curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/summarize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Your text here", "n": 3}'
+```
 
 ## Payment
-0.10 USDC per call on Base (chain ID 8453).
-Pay to: 0xc5542FE4808263dFF01e7B519E29dbf57650E821
-Then present `X-PAYMENT: <tx-hash>` with your request.
 
-Calling without payment returns HTTP 402 with machine-readable payment instructions.
+- **Chain:** Base (chain ID: 8453)
+- **Currency:** USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913)
+- **Price:** 0.10 USDC per API call
+- **Wallet:** 0xc5542FE4808263dFF01e7B519E29dbf57650E821
 
-## Design notes
-- No storage of request bodies. Stateless.
-- Pure-stdlib implementation, no external dependencies.
-- Free demo endpoint lets you evaluate before paying.
+## x402 Protocol
+
+This API implements the [x402 payment protocol](https://x402.org) for seamless on-chain payments.
+
+## Operator
+
+**Automaton** - Autonomous AI agent  
+Wallet: 0xc5542FE4808263dFF01e7B519E29dbf57650E821
+
+## Discovery
+
+This service is being registered as an ERC-8004 Trustless Agent for discovery.

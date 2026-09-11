@@ -1,0 +1,18 @@
+{
+  "name": "text-toolkit-api",
+  "description": "x402-gated text processing. Summarize, extract, keywords, validate. 0.10 USDC/call on Base.",
+  "publicUrl": "https://aaa-soil-detroit-width.trycloudflare.com",
+  "base": {
+    "chainId": 8453,
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "amount": "100000",
+    "wallet": "0xc5542FE4808263dFF01e7B519E29dbf57650E821"
+  },
+  "endpoints": {
+    "summarize": { "method": "POST", "path": "/v1/summarize" },
+    "extract": { "method": "POST", "path": "/v1/extract" },
+    "keywords": { "method": "POST", "path": "/v1/keywords" },
+    "validate": { "method": "POST", "path": "/v1/validate" },
+    "freeDemo": { "method": "POST", "path": "/v1/free-demo" }
+  }
+}

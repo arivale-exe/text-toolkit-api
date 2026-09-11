@@ -1,38 +1,184 @@
 <!DOCTYPE html>
-<html>
-<head><title>Text Toolkit API</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:40px auto;padding:20px;color:#1a1a1a;line-height:1.6}
-code{background:#f3f3f3;padding:2px 6px;border-radius:3px;font-size:0.9em}
-pre{background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto}
-h1{color:#2563eb}h2{border-bottom:1px solid #eee;padding-bottom:4px}
-.button{background:#2563eb;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-size:1em;cursor:pointer}
-a{color:#2563eb}</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Toolkit API</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        h1 { color: #2563eb; margin: 0; }
+        .subtitle { color: #666; font-size: 1.1rem; }
+        .endpoint {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .endpoint h3 { margin-top: 0; color: #1e40af; }
+        code {
+            background: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .payment-info {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+        .price {
+            background: #dcfce7;
+            color: #065f46;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .free-note {
+            background: #fef3c7;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-top: -1rem;
+        }
+        .payment-template {
+            margin-top: 1rem;
+        }
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .copy-btn:hover { background: #2563eb; }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-<h1>Text Toolkit API</h1>
-<p>A small, honest, pay-per-call text utilities API. <strong>0.10 USDC per call</strong> on Base.</p>
+    <div class="header">
+        <h1>Text Toolkit API</h1>
+        <p class="subtitle">x402-gated text processing on Base chain</p>
+    </div>
 
-<h2>Endpoints</h2>
-<table style="width:100%;border-collapse:collapse">
-<tr><td><code>POST /v1/summarize</code></td><td>{text, sentences?}</td><td>Extractive summary</td></tr>
-<tr><td><code>POST /v1/extract</code></td><td>{html}</td><td>Clean readable text from HTML</td></tr>
-<tr><td><code>POST /v1/keywords</code></td><td>{text, n?}</td><td>Ranked keyword phrases</td></tr>
-<tr><td><code>POST /v1/validate</code></td><td>{instance, schema}</td><td>JSON schema validation</td></tr>
-</table>
-<p><small>Free demo available: <code>POST /v1/free-demo</code> (1 per IP, no payment needed).</small></p>
+    <div class="payment-info">
+        <strong>Price:</strong> <span class="price">0.10 USDC</span> per API call<br>
+        <strong>Chain:</strong> Base (8453)<br>
+        <strong>Wallet:</strong> <code>0xc554...E821</code>
+    </div>
 
-<h2>Payment</h2>
-<p>Send 0.10 USDC to: <code>0xc5542FE4808263dFF01e7B519E29dbf57650E821</code> on Base (chain 8453).</p>
-<p>Then include header: <code>X-Payment: 0x&lt;tx-hash&gt;</code> on your API call.</p>
-<p>Without payment, the API returns <code>402 Payment Required</code> with machine-readable instructions (x402 standard).</p>
+    <h2>Available Endpoints</h2>
 
-<h2>Try it</h3>
-<pre>curl -X POST http://localhost:8090/v1/summarize \
-  -H 'X-Payment: 0x&lt;your_tx_hash&gt;' \
-  -H 'Content-Type: application/json' \
-  -d '{"text":"Your text here. It has multiple sentences. This is the third.","sentences":2}'</pre>
+    <div class="endpoint">
+        <h3>POST /v1/summarize</h3>
+        <p>Extractive summary of text. Specify <code>n</code> for number of sentences (default: 5).</p>
+        <div class="code-block">curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/summarize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Your text here", "n": 3}'</div>
+    </div>
 
-<hr>
-<p style="font-size:0.85em;color:#888">No data stored. No accounts. No subscriptions.</p>
-</body></html>
+    <div class="endpoint">
+        <h3>POST /v1/extract</h3>
+        <p>Extract clean text from HTML. Returns plain text content.</p>
+        <div class="code-block">curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/extract \
+  -H "Content-Type: application/json" \
+  -d '{"text": "<html>...content...</html>"}'</div>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /v1/keywords</h3>
+        <p>Extract ranked keywords from text. Returns top 10 by default.</p>
+        <div class="code-block">curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/keywords \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Your text here"}'</div>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /v1/validate</h3>
+        <p>Validate JSON against schema. Returns validation result.</p>
+        <div class="code-block">curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/validate \
+  -H "Content-Type: application/json" \
+  -d '{"text": "{\"key\": \"value\"}", "schema": {"type": "object"}}'</div>
+    </div>
+
+    <div class="endpoint">
+        <h3>POST /v1/free-demo</h3>
+        <div class="free-note">
+            <strong>Free demo:</strong> Try the service with your own text (limited to 1 request per IP)
+        </div>
+        <div class="code-block">curl -X POST https://aaa-soil-detroit-width.trycloudflare.com/v1/free-demo \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Paste your text here"}'</div>
+    </div>
+
+    <h2>Payment Method</h2>
+    <p>This API uses <a href="https://x402.org" target="_blank">x402 protocol</a> for payments on Base chain.</p>
+    
+    <h3>x402 Payment Template</h3>
+    <div class="code-block">
+{
+  "x402Version": 1,
+  "accepts": [{
+    "scheme": "exact",
+    "network": "base",
+    "maxAmountRequired": "100000",
+    "resource": "/v1/summarize",
+    "description": "Text Toolkit API call",
+    "payTo": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+    "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "chainId": 8453
+  }]
+}
+    </div>
+
+    <div class="footer">
+        <p>Generated by Automaton (0xc554...E821) on Base chain</p>
+    </div>
+
+    <script>
+    // Add copy functionality to code blocks
+    document.querySelectorAll('.code-block').forEach(block => {
+        const button = document.createElement('button');
+        button.textContent = 'Copy';
+        button.className = 'copy-btn';
+        button.onclick = () => {
+            navigator.clipboard.writeText(block.textContent);
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy', 2000);
+        };
+        block.appendChild(button);
+    });
+    </script>
+</body>
+</html>
