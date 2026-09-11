@@ -12,11 +12,15 @@ Endpoints:
 import http.server, socketserver, json, re, sys, time, hashlib, html, urllib.parse
 from collections import Counter
 from html.parser import HTMLParser
+try:
+    from verify_pay import verify_tx
+except Exception:
+    verify_tx = None
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8090
 WALLET = "0xc5542FE4808263dFF01e7B519E29dbf57650E821"
 CHAIN_ID = 8453
-USDC = "0xdC035D455F494E45aDA89Fb123D5aF41b6a8dT4A"
+USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
 PRICE_USDC = "100000"  # 0.10 USDC per call
 PRICE_USD = 0.10
 
@@ -127,15 +131,30 @@ def payment_required_response():
         "error": "Payment required: 0.10 USDC on Base"
     }
 
-def verify_x402(headers):
-    """Accept a presented x402 payment header or tx hash. In production this
-    would verify on-chain; here we accept well-formed claims so integrators
-    can wire their own verifier."""
+def _extract_tx(headers):
     for h in ("X-PAYMENT", "X-Payment", "X-TX-HASH", "Authorization"):
         v = headers.get(h) or headers.get(h.lower())
-        if v and len(str(v)) > 10:
-            return True
-    return False
+        if v:
+            m = re.search(r"0x[0-9a-fA-F]{64}", str(v))
+            if m:
+                return m.group(0)
+    return None
+
+def verify_x402(headers):
+    """Real on-chain x402 verification: a presented header must contain a
+    64-hex tx hash that actually transferred >=0.10 USDC to our wallet on
+    Base, and must not be replayed. Falls back to REJECT if verifier
+    unavailable (never silently accept payment we cannot prove)."""
+    tx = _extract_tx(headers)
+    if not tx:
+        return False, "no valid tx hash in payment header"
+    if verify_tx is None:
+        return False, "verifier unavailable"
+    try:
+        ok, reason, paid = verify_tx(tx, int(PRICE_USDC))
+        return ok, reason
+    except Exception as e:
+        return False, f"verification error: {e}"
 
 class Handler(http.server.BaseHTTPRequestHandler):
     def _send(self, code, obj, extra=None):
@@ -193,8 +212,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if self.path not in ("/v1/summarize", "/v1/extract", "/v1/keywords", "/v1/validate"):
             return self.send_error(404, "Not Found")
 
-        if not verify_x402(self.headers):
-            return self._send(402, payment_required_response())
+        ok, why = verify_x402(self.headers)
+        if not ok:
+            resp = payment_required_response()
+            resp["error"] = f"Payment required: 0.10 USDC on Base ({why})"
+            return self._send(402, resp)
 
         if self.path == "/v1/summarize":
             text = data.get("text") or ""
