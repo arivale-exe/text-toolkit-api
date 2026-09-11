@@ -1,0 +1,2 @@
+# Text Toolkit API - No external dependencies
+# Pure Python stdlib implementation
