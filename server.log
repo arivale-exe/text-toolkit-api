@@ -1,3 +1,6 @@
 Text Toolkit API on port 8090
 [text-toolkit] "GET / HTTP/1.1" 200 -
 [text-toolkit] "GET / HTTP/1.1" 200 -
+[text-toolkit] "POST /v1/free-demo HTTP/1.1" 200 -
+[text-toolkit] "POST /v1/summarize HTTP/1.1" 402 -
+[text-toolkit] "POST /v1/free-demo HTTP/1.1" 429 -

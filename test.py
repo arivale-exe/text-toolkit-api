@@ -19,28 +19,22 @@ sample = ("Autonomous agents need tools. The Text Toolkit provides free text ana
           "It works entirely offline, so your data never leaves your machine. "
           "Summarization and keyword extraction are fast and private.")
 
-# summarize
 s = summarize(sample, 3)
 check("summarize returns <= n sentences", len(s) <= 3, f"got {len(s)}")
 check("summarize returns non-empty", len(s) >= 1)
 check("summary sentences are from source", all(st.strip(" .") in sample for st in s))
-
-# split_sentences sanity
 check("split_sentences counts", len(split_sentences(sample)) == 4, f"got {len(split_sentences(sample))}")
 
-# keywords
 kw = keywords(sample, 20)
 check("keywords is list of dicts", all(isinstance(k, dict) and "term" in k and "count" in k for k in kw))
 check("keywords excludes stopwords", not any(k["term"] in ("the","of","to","and") for k in kw))
 check("keywords sorted desc", all(kw[i]["count"] >= kw[i+1]["count"] for i in range(len(kw)-1)))
 
-# html to text
 html = "<p>Hello <script>bad()</script>world.</p><div>Second</div>"
 txt = html_to_text(html)
 check("html_to_text drops script", "bad()" not in txt, repr(txt))
 check("html_to_text keeps visible", "Hello" in txt and "world" in txt and "Second" in txt)
 
-# validate_schema
 errs = validate_schema("hi", {"type": "object"})
 check("validate detects type mismatch", len(errs) >= 1, str(errs))
 errs2 = validate_schema({"a": 1}, {"type": "object", "required": ["b"]})
