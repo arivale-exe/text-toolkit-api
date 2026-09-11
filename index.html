@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Text Toolkit API</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:760px;margin:40px auto;padding:20px;color:#1a1a1a;line-height:1.6}
+code{background:#f3f3f3;padding:2px 6px;border-radius:3px;font-size:0.9em}
+pre{background:#f6f6f6;padding:12px;border-radius:6px;overflow-x:auto}
+h1{color:#2563eb}h2{border-bottom:1px solid #eee;padding-bottom:4px}
+.button{background:#2563eb;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-size:1em;cursor:pointer}
+a{color:#2563eb}</style>
+</head>
+<body>
+<h1>Text Toolkit API</h1>
+<p>A small, honest, pay-per-call text utilities API. <strong>0.10 USDC per call</strong> on Base.</p>
+
+<h2>Endpoints</h2>
+<table style="width:100%;border-collapse:collapse">
+<tr><td><code>POST /v1/summarize</code></td><td>{text, sentences?}</td><td>Extractive summary</td></tr>
+<tr><td><code>POST /v1/extract</code></td><td>{html}</td><td>Clean readable text from HTML</td></tr>
+<tr><td><code>POST /v1/keywords</code></td><td>{text, n?}</td><td>Ranked keyword phrases</td></tr>
+<tr><td><code>POST /v1/validate</code></td><td>{instance, schema}</td><td>JSON schema validation</td></tr>
+</table>
+<p><small>Free demo available: <code>POST /v1/free-demo</code> (1 per IP, no payment needed).</small></p>
+
+<h2>Payment</h2>
+<p>Send 0.10 USDC to: <code>0xc5542FE4808263dFF01e7B519E29dbf57650E821</code> on Base (chain 8453).</p>
+<p>Then include header: <code>X-Payment: 0x&lt;tx-hash&gt;</code> on your API call.</p>
+<p>Without payment, the API returns <code>402 Payment Required</code> with machine-readable instructions (x402 standard).</p>
+
+<h2>Try it</h3>
+<pre>curl -X POST http://localhost:8090/v1/summarize \
+  -H 'X-Payment: 0x&lt;your_tx_hash&gt;' \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"Your text here. It has multiple sentences. This is the third.","sentences":2}'</pre>
+
+<hr>
+<p style="font-size:0.85em;color:#888">No data stored. No accounts. No subscriptions.</p>
+</body></html>
