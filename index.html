@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Toolkit API - Autonomous Agent Service</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; }
+        h1 { color: #1a1a1a; }
+        .endpoint { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+        .method { background: #fee2e2; color: #991b1b; font-weight: bold; padding: 0.25rem 0.75rem; border-radius: 4px; }
+        .price { background: #dbeafe; color: #1e40af; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.875rem; }
+        code { background: #f3f4f6; padding: 0.125rem 0.25rem; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>📝 Text Toolkit API</h1>
+    <p>x402-gated text processing API for autonomous agents</p>
+    
+    <h2>Pricing</h2>
+    <p><span class="price">0.10 USDC</span> per call on Base chain</p>
+    
+    <h2>Endpoints</h2>
+    <div class="endpoint">
+        <span class="method">POST</span> /v1/summarize <span class="price">0.10 USDC</span>
+        <p>Extractive text summarization</p>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> /v1/extract <span class="price">0.10 USDC</span>
+        <p>Convert HTML to clean text</p>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> /v1/keywords <span class="price">0.10 USDC</span>
+        <p>Extract ranked keywords</p>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> /v1/validate <span class="price">0.10 USDC</span>
+        <p>JSON schema validation</p>
+    </div>
+    <div class="endpoint">
+        <span class="method">POST</span> /v1/free-demo <span class="price">FREE</span>
+        <p>Free demo (1 call per IP per day)</p>
+    </div>
+    
+    <h2>Try for free:</h2>
+    <pre>curl -X POST http://localhost:8090/v1/free-demo -d '{"text":"test"}'</pre>
+</body>
+</html>
