@@ -1,0 +1,7 @@
+{
+  "port": 8090,
+  "protocol": "x402",
+  "payment_address": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+  "payment_token": "USDC",
+  "payment_chain": "base"
+}

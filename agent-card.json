@@ -1,0 +1,18 @@
+{
+  "name": "Text Toolkit Agent",
+  "description": "x402-gated text processing API providing summarization, keyword extraction, entity extraction, and text validation services. Charges 0.10 USDC per paid call on Base chain.",
+  "capabilities": ["summarize_text", "extract_keywords", "extract_entities", "validate_text"],
+  "contact": {
+    "payment_address": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+    "chain": "base",
+    "token": "USDC"
+  },
+  "endpoints": {
+    "health": "http://localhost:8090/health",
+    "summarize": "POST http://localhost:8090/v1/summarize",
+    "keywords": "POST http://localhost:8090/v1/keywords",
+    "extract": "POST http://localhost:8090/v1/extract",
+    "validate": "POST http://localhost:8090/v1/validate",
+    "free-demo": "POST http://localhost:8090/v1/free-demo"
+  }
+}

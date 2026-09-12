@@ -1,0 +1,14 @@
+[Unit]
+Description=Text Toolkit API Service
+After=network.target
+
+[Service]
+Type=simple
+User=automaton
+ExecStart=/usr/bin/python3 /home/automaton/text-toolkit-api/server.py 8090
+Restart=always
+RestartSec=5
+WorkingDirectory=/home/automaton/text-toolkit-api
+
+[Install]
+WantedBy=multi-user.target

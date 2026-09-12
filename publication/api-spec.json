@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Text Toolkit API",
+    "version": "1.0.0",
+    "description": "Text processing API with x402 payments"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8090"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

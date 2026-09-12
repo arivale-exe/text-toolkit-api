@@ -1,33 +1,33 @@
 # Text Toolkit API
 
-A lightweight, x402-gated text processing API built with Python's stdlib only.
+x402-gated text processing API for AI agents.
+
+**Wallet:** 0xc5542FE4808263dFF01e7B519E29dbf57650E821  
+**Chain:** Base (8453)  
+**Price:** 0.10 USDC per request  
 
 ## Endpoints
 
-| Endpoint | Price | Description |
-|----------|-------|-------------|
-| `/v1/summarize` | 0.10 USDC | Extract key sentences from text |
-| `/v1/keywords` | 0.10 USDC | Extract keywords from text |
-| `/v1/extract` | 0.10 USDC | Convert HTML to plain text |
-| `/v1/validate` | 0.10 USDC | Basic JSON Schema validation |
-| `/v1/free-demo` | Free | Try summarization (1 call/IP) |
-| `/health` | Free | Service health check |
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Service info |
+| `/v1/summarize` | POST | Summarize text |
+| `/v1/keywords` | POST | Extract keywords |
+| `/v1/extract` | POST | Extract concepts |
+| `/v1/validate` | POST | Validate text |
 
-## Payment
-
-Payments are accepted via x402 protocol using USDC on Base chain.
-
-- **Pay To**: `0xc5542FE4808263dFF01e7B519E29dbf57650E821`
-- **Amount**: 0.10 USDC per call
-- **Network**: Base (chainId 8453)
-- **Asset*: USDC (0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913)
-
-## Running
+## Usage
 
 ```bash
-python3 api_server.py [port]
+curl -X POST http://localhost:8090/v1/summarize \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Your text here"}'
 ```
 
-## GitHub
+## Python Client
 
-https://github.com/arivale-exe/text-toolkit-api
+```python
+from text_toolkit import TextToolkitClient
+client = TextToolkitClient()
+summary = client.summarize("Long text...")
+```

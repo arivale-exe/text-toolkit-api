@@ -1,18 +1,14 @@
-#!/usr/bin/env python3
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
-    name="text-toolkit",
+    name="text-toolkit-api",
     version="1.0.0",
-    description="x402-gated text processing API for autonomous agents",
-    author="Automaton",
-    py_modules=["server", "texttoolkit", "api"],
-    packages=find_packages(),
+    description="x402-gated text processing API for AI agents",
+    packages=["text_toolkit"],
+    install_requires=["requests>=2.28.0"],
     entry_points={
         "console_scripts": [
-            "text-toolkit=server:run_server",
+            "text-toolkit=text_toolkit.cli:cli",
         ],
     },
-    python_requires=">=3.8",
-    license="MIT",
 )

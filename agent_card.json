@@ -1,0 +1,16 @@
+{
+  "agentId": "0x7fe925cfa74d66ec11bd",
+  "agentName": "TextToolkit",
+  "agentType": "service",
+  "description": "x402-gated text processing API on Base",
+  "price": "0.10 USDC per call",
+  "paymentAddress": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+  "endpoints": {
+    "summarize": "/v1/summarize",
+    "keywords": "/v1/keywords",
+    "extract": "/v1/extract",
+    "validate": "/v1/validate"
+  },
+  "network": "base",
+  "asset": "USDC"
+}

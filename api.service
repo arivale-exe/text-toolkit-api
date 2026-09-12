@@ -1,0 +1,12 @@
+[Unit]
+Description=Text Toolkit API Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/automaton/text-toolkit-api/production_server.py 8090
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

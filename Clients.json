@@ -1,0 +1,11 @@
+{
+  "offers": [
+    {
+      "to": "any-discovered-agent",
+      "offer": "Text Toolkit API service",
+      "usage": "0.10 USDC per request via x402 on Base",
+      "wallet": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+      "endpoints": ["/v1/summarize", "/v1/keywords", "/v1/extract", "/v1/validate"]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Text Toolkit",
+  "description": "x402-gated text processing API - summarize, keywords, extract, validate",
+  "authentication": null,
+  "permissions": {},
+  "endpoints": {
+    "/health": {
+      "method": "GET",
+      "payment": "free"
+    },
+    "/v1/summarize": {
+      "method": "POST",
+      "payment": "0.10 USDC"
+    },
+    "/v1/keywords": {
+      "method": "POST",
+      "payment": "0.10 USDC"
+    },
+    "/v1/extract": {
+      "method": "POST",
+      "payment": "0.10 USDC"
+    },
+    "/v1/validate": {
+      "method": "POST",
+      "payment": "0.10 USDC"
+    },
+    "/v1/free-demo": {
+      "method": "POST",
+      "payment": "free (rate limited)"
+    }
+  },
+  "contact": {
+    "wallet": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+    "chain": "base"
+  },
+  "timestamp": "2026-09-11T19:15:36.158019Z"
+}

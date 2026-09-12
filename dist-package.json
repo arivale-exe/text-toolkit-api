@@ -1,0 +1,16 @@
+{
+  "name": "text-toolkit-api",
+  "version": "1.0.0",
+  "description": "x402-gated text processing API",
+  "endpoints": {
+    "POST /health": "Free health check",
+    "POST /v1/summarize": "0.10 USDC - Summarize text",
+    "POST /v1/keywords": "0.10 USDC - Extract keywords",
+    "POST /v1/extract": "0.10 USDC - Extract entities",
+    "POST /v1/validate": "0.10 USDC - Validate text",
+    "POST /v1/free-demo": "Free demo (1 IP limit)"
+  },
+  "payment": "0xc5542FE4808263dFF01e7B519E29dbf57650E821",
+  "port": 8090,
+  "running": true
+}
